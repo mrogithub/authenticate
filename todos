@@ -1,0 +1,5 @@
+Ein paar Erweiterungen, die man an diesem Beispiel testen könnte.
+
+- Internationalisierung
+- Das Passwort sollte nicht im Klartext übertragen werden
+- Tests mit Karma
