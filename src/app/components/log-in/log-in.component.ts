@@ -3,7 +3,7 @@ import { Store} from "@ngrx/store";
 
 import { User} from '../../models/user';
 import {AppState} from "../../store/app.states";
-import {Login} from "../../store/actions/auth.actions";
+import {LogIn} from "../../store/actions/auth.actions";
 
 @Component({
   selector: 'app-log-in',
@@ -30,6 +30,6 @@ export class LogInComponent implements OnInit {
         password: this.user.password
     };
 
-    this.store.dispatch(new Login(payload));
+    this.store.dispatch(new LogIn(payload));
   }
 }
