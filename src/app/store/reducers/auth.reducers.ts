@@ -20,10 +20,15 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: All): State{
 
+    // You can create a variable for the remaining items in a list using the syntax ...:
+    // let [first, ...rest] = [1, 2, 3, 4];
+    // console.log(first); // outputs 1
+    // console.log(rest); // outputs [ 2, 3, 4 ]
+
     switch(action.type){
         case AuthActionTypes.LOGIN_SUCCESS: {
             return {
-                ...state,
+                ...state,        // ...variable kennzeichnet den Rest einer Liste
                 isAuthenticated: true,
                 user: {
                     token: action.payload.token,
