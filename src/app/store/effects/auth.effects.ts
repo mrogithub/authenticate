@@ -5,7 +5,7 @@ import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Observable} from "rxjs/Observable";
 import {tap} from "rxjs/operators";
 import {AuthActionTypes, LogIn, LogInSuccess,LogInFailure,
-    SignUp, SignUpSuccess, SignUpFailure, LogOut } from "../actions/auth.actions";
+    SignUp, SignUpSuccess, SignUpFailure, LogOut,GetStatus } from "../actions/auth.actions";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -103,4 +103,11 @@ export  class AuthEffects {
             localStorage.removeItem('token');
         })
     )
+
+    @Effect({dispatch: false})
+    GetStatus: Observable<any> = this.actions
+        .ofType(AuthActionTypes.GET_STATUS)
+        .switchMap(payload => {
+            return this.authService.getStatus()
+        });
 }

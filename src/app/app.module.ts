@@ -14,9 +14,11 @@ import {AuthEffects} from "./store/effects/auth.effects";
 import {reducers} from "./store/app.states"
 import {StoreModule} from "@ngrx/store";
 import {TokenInterceptor, ErrorInterceptor} from "./services/token.interceptor";
+import { StatusComponent } from './components/status/status.component';
 
 const routes: Routes =[{path: 'log-in', component: LogInComponent},
     { path: 'sign-up', component: SignUpComponent},
+    { path: 'status', component: StatusComponent},
     { path: '', component: LandingComponent},
     { path: '**', redirectTo: '/'}];
 
@@ -25,7 +27,8 @@ const routes: Routes =[{path: 'log-in', component: LogInComponent},
     AppComponent,
     LandingComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    StatusComponent
   ],
   imports: [
       BrowserModule,
