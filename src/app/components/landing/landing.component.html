@@ -4,7 +4,7 @@
     <hr><br>
     <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"> </div>
     <ng-template #doSomething>
-      <p>You logged in <em>{{user.email}} !</em></p>
+      <p>You logged in <em> {{user.email}} </em> !  </p>
       <button class="btn btn-primary" (click)="logout()"> Log out </button>
     </ng-template>
     <ng-template #doSomethingElse>
