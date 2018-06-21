@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes} from "@angular/router";
+import { RouterModule, Routes, CanActivate} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {EffectsModule} from "@ngrx/effects";
@@ -10,6 +10,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import {AuthService} from "./services/auth.service";
+import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthEffects} from "./store/effects/auth.effects";
 import {reducers} from "./store/app.states"
 import {StoreModule} from "@ngrx/store";
@@ -18,7 +19,7 @@ import { StatusComponent } from './components/status/status.component';
 
 const routes: Routes =[{path: 'log-in', component: LogInComponent},
     { path: 'sign-up', component: SignUpComponent},
-    { path: 'status', component: StatusComponent},
+    { path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
     { path: '', component: LandingComponent},
     { path: '**', redirectTo: '/'}];
 
@@ -39,6 +40,7 @@ const routes: Routes =[{path: 'log-in', component: LogInComponent},
       RouterModule.forRoot(routes)
           ],
   providers: [AuthService,
+      AuthGuardService,
       {   provide: HTTP_INTERCEPTORS,
           useClass: TokenInterceptor,
           multi: true
