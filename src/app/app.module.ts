@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate} from "@angular/router";
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {EffectsModule} from "@ngrx/effects";
-
+import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -17,11 +18,16 @@ import {StoreModule} from "@ngrx/store";
 import {TokenInterceptor, ErrorInterceptor} from "./services/token.interceptor";
 import { StatusComponent } from './components/status/status.component';
 
+export function createTranslateLoader(httpClient: HttpClient){
+    return new TranslateHttpLoader(httpClient, './assets/', '.json');
+}
+
 const routes: Routes =[{path: 'log-in', component: LogInComponent},
     { path: 'sign-up', component: SignUpComponent},
     { path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
     { path: '', component: LandingComponent},
     { path: '**', redirectTo: '/'}];
+
 
 @NgModule({
   declarations: [
@@ -37,7 +43,14 @@ const routes: Routes =[{path: 'log-in', component: LogInComponent},
       HttpClientModule,
       StoreModule.forRoot(reducers, {}),
       EffectsModule.forRoot([AuthEffects]),
-      RouterModule.forRoot(routes)
+      RouterModule.forRoot(routes),
+      TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useFactory: createTranslateLoader,
+              deps:  [HttpClient]
+          }
+      })
           ],
   providers: [AuthService,
       AuthGuardService,

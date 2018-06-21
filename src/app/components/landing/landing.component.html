@@ -5,11 +5,11 @@
     <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"> </div>
     <ng-template #doSomething>
       <p>You logged in <em> {{user.email}} </em> !  </p>
-      <button class="btn btn-primary" (click)="logout()"> Log out </button>
+      <button class="btn btn-primary" (click)="logout()"> {{LOGOUT | translate}} </button>
     </ng-template>
     <ng-template #doSomethingElse>
-      <a [routerLink]="['/log-in']" class="btn btn-primary">Log in</a>
-      <a [routerLink]="['/sign-up']" class="btn btn-primary">Sign up</a>
+      <a [routerLink]="['/log-in']" class="btn btn-primary"> {{LOGIN | translate }}</a>
+      <a [routerLink]="['/sign-up']" class="btn btn-primary">{{SIGNUP |translate}}</a>
     </ng-template>
 
     <a [routerLink]="['/status']" class="btn btn-primary">Status</a>

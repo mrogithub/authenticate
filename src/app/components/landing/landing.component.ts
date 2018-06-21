@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {AppState, selectAuthState} from "../../store/app.states";
 import { LogOut} from '../../store/actions/auth.actions';
 import {Observable} from "rxjs/Observable";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +18,7 @@ export class LandingComponent implements OnInit {
   user = null;
   errorMessage = null;
 
-  constructor(private store: Store<AppState>){
+  constructor(private store: Store<AppState>, private translate: TranslateService){
     this.getState = this.store.select(selectAuthState);
   }
 
