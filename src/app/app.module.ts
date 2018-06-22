@@ -19,7 +19,7 @@ import {TokenInterceptor, ErrorInterceptor} from "./services/token.interceptor";
 import { StatusComponent } from './components/status/status.component';
 
 export function createTranslateLoader(httpClient: HttpClient){
-    return new TranslateHttpLoader(httpClient, './assets/', '.json');
+    return new TranslateHttpLoader(httpClient);
 }
 
 const routes: Routes =[{path: 'log-in', component: LogInComponent},

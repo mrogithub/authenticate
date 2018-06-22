@@ -30,7 +30,12 @@ export class LandingComponent implements OnInit {
     })
   }
 
+  setLanguage(lang): void{
+    this.translate.use(lang);
+  }
+
   logout(): void {
     this.store.dispatch(new LogOut)
   }
 }
+
